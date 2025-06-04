@@ -9,7 +9,7 @@ public class SpellUtility
     //Or a dice roll and the player's stat modifier, like 1d3 + MOD. Or even a dice roll and a number, like 1d4 + 1. 
     //If so, this method uses recursion to calculate the averages of each component and sums them up.
     //This method can calculate the average damage no matter which of these forms it is in.
-    public static int getAverage(String diceRoll, int statModifier)
+    public static int getAverage(String diceRoll, int statModifier) 
     {
         int avg = 0;
         //This if statement checks to see if the diceRoll string has a space, as in "1d8" vs "1d8 + 1". 1d8 
@@ -200,4 +200,29 @@ public class SpellUtility
         //Returns the string with the first letter set to uppercase and the rest set to lowercase.
         return str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
     } 
+
+    public static String convertToIndex(String str)
+    {
+        //The place I use this function in was giving me errors so I had to include this.
+        if (str == null || str.isEmpty()) 
+        {
+            return str;
+        }
+        String newStr = str.toLowerCase().trim();
+        //Uses a while loop that doesn't terminate until there are no more spaces
+        while (newStr.contains(" ")) 
+        {
+            for (int i = 0; i < newStr.length() - 1; i++) 
+            {
+                if (newStr.substring(i, i + 1).equals(" ")) 
+                {
+                    //Replaces the first space found with a hyphen
+                    newStr = newStr.substring(0, i) + "-" + newStr.substring(i + 1);
+                    //Breaks out of the for loop to restart the while loop with the updated string
+                    break; 
+                }
+            }
+        }
+        return newStr;
+    }
 }

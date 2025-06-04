@@ -1,13 +1,12 @@
 package com.example;
 
+//Imports
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,19 +16,22 @@ public class SpellBook
     private String playerClass;
     private int playerLevel;
     private ArrayList<String> spells;
-    public SpellBook(String playerClass, int playerLevel, ArrayList<String> spells)
+
+    //Constructor that sets the instance variables to the parameters.
+    public SpellBook(String playerClass, int playerLevel)
     {
         this.playerClass = playerClass;
         this.playerLevel = playerLevel;
-        this.spells = spells;
     }
 
-    
-    public SpellBook()
-    {
-        this.playerClass = null;
-        this.playerLevel = 0;
-    }
+    //Getter methods
+    public String getPlayerClass(){return playerClass;}
+    public int getPlayerLevel(){return playerLevel;}
+    public ArrayList<String> getPlayerStatModifier(){return spells;}
+
+    //Setter methods
+    public void levelUp(){playerLevel ++;}
+    public void setLevel(int newLevel){playerLevel = newLevel;}
     
     public static String getData(String endpoint) throws Exception 
     {
@@ -268,57 +270,95 @@ public class SpellBook
         {
             //Accesses the JSONObject damage.
             JSONObject damage = spell.getJSONObject("damage");
+
+            //If a damage type is present in the object damage, prints the damage type.
             if (damage.has("damage_type"))
             {
                 JSONObject damage_type = damage.getJSONObject("damage_type");
                 System.out.println("Damage type: " + damage_type.getString("name"));
             }
+
+            //If the damage is displayed with the key damage_at_slot_level (so it scales with the spell slot used), iterates through the keys using an Iterator<> to display all the damages.
             if (damage.has("damage_at_slot_level"))
             {
                 System.out.println("Damage per slot level: ");
                 JSONObject spellDamages = damage.getJSONObject("damage_at_slot_level");
+
+                //This Iterator<String> is just a list of all the keys in spellDamages. This is used so the damage at each level can be accessed.
                 Iterator<String> keys = spellDamages.keys();
+
+                //Checks to see if there's a next value in the key list.
                 while (keys.hasNext()) 
                 {
+                    //If so, accesses the following key.
                     String k = keys.next();
+
+                    //Gets spellDamages at that key so that the damage of the spell and the average can be printed nicely.
                     String spellDmg = spellDamages.getString(k);
+
+                    //If the spell contains a stat modifier, removes it from the spell and replaces it with the modifier.
+                    if (spellDmg.contains("MOD"))
+                    {
+                        spellDmg = SpellUtility.removeMOD(spellDmg) + statModifier;
+                    }
                     System.out.println(k + ": " + spellDmg + " (Average: " + SpellUtility.getAverage(spellDmg, statModifier) + ")");
                 }
             }
+
+            //If the damage is displayed with the key damage_at_character_level (so it scales with the level of the character), iterates through the keys using an Iterator<> to display all the damages.
             else if (damage.has("damage_at_character_level"))
             {
                 System.out.println("Damage per character level: ");
                 JSONObject spellDamages = damage.getJSONObject("damage_at_character_level");
+
+                //This Iterator<String> is just a list of all the keys in spellDamages. This is used so the damage at each level can be accessed.
                 Iterator<String> keys = spellDamages.keys();
+
+                //Checks to see if there's a next value in the key list.
                 while (keys.hasNext()) 
                 {
+                    //If so, accesses the following key
                     String k = keys.next();
+
+                    //Gets spellDamages at that key so that the damage of the spell and the average can be printed nicely.
                     String spellDmg = spellDamages.getString(k);
+
+                    //If the spell contains a stat modifier, removes it from the spell and replaces it with the modifier.
+                    if (spellDmg.contains("MOD"))
+                    {
+                        spellDmg = SpellUtility.removeMOD(spellDmg) + statModifier;
+                    }
                     System.out.println(k + ": " + spellDmg + " (Average: " + SpellUtility.getAverage(spellDmg, statModifier) + ")");
                 }
             }
         }   
 
+        //If it's a healing spell, iterates through the keys using an Iterator<> to display all the damages.
         if (spell.has("heal_at_slot_level"))
         {
             System.out.println("Healing per spell slot level: ");
             JSONObject spellHealing = spell.getJSONObject("heal_at_slot_level");
+            //This Iterator<String> is just a list of all the keys in spellDamages. This is used so the damage at each level can be accessed.
             Iterator<String> keys = spellHealing.keys();
+
+            //Checks to see if there's a next value in the key list.
             while (keys.hasNext()) 
             {
+                //If so, accesses the following key
                 String k = keys.next();
+                
+                //Gets spellHeal at that key so that the damage of the spell and the average can be printed nicely.
                 String spellHeal = spellHealing.getString(k);
-                spellHeal = SpellUtility.removeMOD(spellHeal) + statModifier;
+                //If the spell contains a stat modifier, removes it from the spell and replaces it with the modifier.
+                if (spellHeal.contains("MOD"))
+                {
+                    spellHeal = SpellUtility.removeMOD(spellHeal) + statModifier;
+                }
                 System.out.println(k + ": " + spellHeal + " (Average: " + SpellUtility.getAverage(spellHeal, statModifier) + ")");
             }
         }
         System.out.println();
     }
     
-    public String getPlayerClass(){return playerClass;}
-    public int getPlayerLevel(){return playerLevel;}
-    public ArrayList<String> getPlayerStatModifier(){return spells;}
-    public void levelUp(){playerLevel ++;}
-    public void setLevel(int newLevel){playerLevel = newLevel;}
 }
     
