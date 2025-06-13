@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * Hello world!
  *
  */
-public class App
+public class AppTerminal
 {
     public static void main(String[] args) throws Exception
     {

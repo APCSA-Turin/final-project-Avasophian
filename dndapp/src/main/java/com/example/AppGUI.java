@@ -38,8 +38,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-
-public class App2 extends Application 
+//Overall the GUI has a bit more minimal commenting except in cases where the intent of something isn't clear.
+public class AppGUI extends Application 
 { 
     private String playerClass;
     private int playerLevel;
@@ -457,7 +457,7 @@ public class App2 extends Application
             Rectangle round = new Rectangle();
             round.widthProperty().bind(optionBox.widthProperty());
             round.heightProperty().bind(optionBox.heightProperty());
-            round.setArcWidth(40);  // must match or exceed your radius * 2
+            round.setArcWidth(40); 
             round.setArcHeight(40);
             optionBox.setClip(round);
 
@@ -658,7 +658,6 @@ public class App2 extends Application
 
                 if (choice == null || choice.equals("None")) 
                 {
-                    // Sort alphabetically by name (ascending)
                     for (int i = 0; i < spellsCanLearn.length() - 1; i++) 
                     {
                         int minIndex = i;
@@ -729,8 +728,7 @@ public class App2 extends Application
 
             CheckBox levelBox = new CheckBox(lvl);
             levelBox.setFont(spellFont);
-            levelBox.setSelected(true); // enabled by default
-
+            levelBox.setSelected(true); 
             levelBox.setOnAction(new EventHandler<ActionEvent>() 
             {
                 public void handle(ActionEvent event) 
@@ -765,7 +763,7 @@ public class App2 extends Application
         {
             CheckBox damageTypeBox = new CheckBox(type);
             damageTypeBox.setFont(spellFont);
-            damageTypeBox.setSelected(true); // all enabled by default
+            damageTypeBox.setSelected(true);
 
             damageTypeBox.setOnAction(new EventHandler<ActionEvent>() 
             {
@@ -780,7 +778,6 @@ public class App2 extends Application
                         allowedDmgTypes.remove(type);
                     }
 
-                    // Match terminal logic
                     filterByDamageType = !allowedDmgTypes.containsAll(fixedAllowedDmgTypes);
                     updateFilteredSpellList(spellsCanLearn, spellListVBox, spellFont, selectedSpell2, spellInfoText, statModifier, addButton, spellBook, true);
 
@@ -1186,7 +1183,6 @@ public class App2 extends Application
             {
                 try 
                 {
-                    //Saves the new data of the player's class, spells, etc using spellSaver, 
                     SpellSaver.saveData(playerSpells, playerClass, playerLevel, statModifier);
                 } 
                 catch (IOException e) 
