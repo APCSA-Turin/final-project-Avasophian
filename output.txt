@@ -1,4 +1,0 @@
-class:bard
-level:20
-stat modifier:5
-vicious-mockery
