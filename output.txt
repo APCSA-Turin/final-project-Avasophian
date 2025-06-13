@@ -1,0 +1,8 @@
+class:paladin
+level:20
+stat modifier:5
+branding-smite
+create-food-and-water
+revivify
+divine-favor
+dispel-magic
