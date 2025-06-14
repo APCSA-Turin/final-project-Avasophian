@@ -1,0 +1,377 @@
+.root
+{
+    -fx-background-color:#f4ede5;
+}
+.button 
+{
+    -fx-background-radius: 15;  
+    -fx-border-radius: 15;      
+    -fx-border-width: 0;        
+    -fx-border-color: transparent; 
+    -fx-padding: 8 16;
+}
+
+.confirm 
+{
+    -fx-background-color: #D5C8BC;
+    -fx-border-color: #9D7C60;
+    -fx-border-radius: 15;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 10, 0.0, 2, 2);
+}
+
+
+
+.card {
+    -fx-background-color: #fdfbff;
+    -fx-background-radius: 15;
+    -fx-border-color: #102542;
+    -fx-border-radius: 15;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 10, 0.0, 2, 2);
+    -fx-padding: 10;
+    -fx-alignment: center;
+}
+
+.wizard
+{
+    -fx-background-color: #FDEED7; 
+    -fx-border-color: #D8B377;
+}
+
+.wizard Label
+{
+    -fx-text-fill: #8B5E3C;
+}
+
+.cleric 
+{
+    -fx-background-color: #D7E2FD; 
+    -fx-border-color: #778DD8;
+}
+
+.cleric Label
+{
+    -fx-text-fill: #3C4D8B; /* navy-ish */
+}
+
+.druid 
+{
+    -fx-background-color: #D7FDDC; 
+    -fx-border-color: #77D8A7;
+}
+
+.druid Label
+{
+    -fx-text-fill: #3C8B5E; /* green */
+}
+
+.bard 
+{
+    -fx-background-color: #FDD7E7; 
+    -fx-border-color: #D877B0;
+}
+
+.bard Label
+{
+    -fx-text-fill: #8B3C70; 
+}
+
+.sorcerer 
+{
+    -fx-background-color: #E9D7FD; 
+    -fx-border-color: #A777D8;
+}
+
+.sorcerer Label
+{
+    -fx-text-fill: #6B3C8B;
+}
+
+.warlock 
+{
+    -fx-background-color: #D7FBFD; 
+    -fx-border-color: #77D8D8;
+}
+
+.warlock Label
+{
+    -fx-text-fill: #3C7A8B; 
+}
+
+.paladin 
+{
+    -fx-background-color: #FDE3D7;
+    -fx-border-color: #D89277;
+}
+
+.paladin Label
+{
+    -fx-text-fill: #8B4D3C;
+}
+
+.ranger 
+{
+    -fx-background-color: #EEFDD7;
+    -fx-border-color: #A3D877;
+}
+
+.ranger Label
+{
+    -fx-text-fill: #6A8B3C;
+}
+
+
+.sidebar 
+{
+    -fx-background-color: #e9ebe1;
+    -fx-padding: 15;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #2e302f;
+    -fx-border-width: 4px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.08), 8, 0, 2, 2);
+}
+
+.spell-info 
+{
+    -fx-background-color: #e9ebe1;
+    -fx-background-radius: 15;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.05), 5, 0.0, 2, 2);
+}
+
+.text-field 
+{
+    -fx-background-color: #e9ebe1;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-border-color: #5d4037;
+    -fx-border-radius: 10;
+    -fx-border-width: 1.5;
+    -fx-padding: 5 10;
+}
+
+.combo-box 
+{
+    -fx-background-color: #e9ebe1;
+    -fx-border-color: #2e302f;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 5 10;
+    -fx-font-size: 14px;
+}
+
+
+.add-button 
+{
+    -fx-background-color: #596e5e;
+    -fx-text-fill: #2e302f;            
+    -fx-background-radius: 15;
+    -fx-border-color: #2e302f;          
+    -fx-border-width: 4px;
+    -fx-border-radius: 15;
+    -fx-font-size: 16px;
+    -fx-font-family: "Georgia";
+    -fx-font-weight: bold;
+    
+}
+
+
+.add-button:hover
+{
+    -fx-background-color: #3e5042;
+}
+
+.spell-button
+{
+    -fx-background-color: #596e5e;     
+    -fx-text-fill: #2e302f;             
+    -fx-background-radius: 15;
+    -fx-border-color: #2e302f;           
+    -fx-border-width: 4px;
+    -fx-border-radius: 15;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Georgia";
+
+}
+
+.brown-button
+{
+    -fx-background-color: #ceb9a4;     
+    -fx-text-fill: #5d4037;             
+    -fx-background-radius: 15;
+    -fx-border-color: #876962;           
+    -fx-border-width: 4px;
+    -fx-border-radius: 15;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Georgia";
+
+}
+
+
+.spell-button:hover
+{
+    -fx-background-color: #3e5042; 
+}
+
+
+.brown-button:hover
+{
+    -fx-background-color: #bfae9f; 
+}
+
+
+.titled-pane 
+{
+    -fx-background-color: #596e5e;
+    -fx-border-color: #2e302f;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.titled-pane .title 
+{
+    -fx-background-color: #596e5e;
+    -fx-background-radius: 10;
+    -fx-text-fill: #2e302f;
+}
+
+.titled-pane .arrow 
+{
+    -fx-background-color: #2e302f;
+}
+
+.search-button
+{
+    -fx-background-color: #596e5e;     
+    -fx-text-fill: #2e302f;             
+    -fx-background-radius: 15;
+    -fx-border-color: #2e302f;           
+    -fx-border-width: 4px;
+}
+
+.spell-scroll,
+.spell-scroll-modified
+{
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-color: #2e302f;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-background-color: transparent;
+    -fx-border-width: 4px;
+
+}
+
+.spell-scroll .corner
+{
+    -fx-background-color: transparent;
+}
+
+
+.spell-scroll .viewport 
+{
+    -fx-background-color: #e9ebe1;
+    -fx-border-color: transparent;
+    -fx-border-radius: 15 0 0 15;
+    -fx-background-radius: 15 0 0 15;
+}
+
+.spell-scroll-modified .viewport 
+{
+    -fx-background-color: #e9ebe1;
+    -fx-border-color: transparent;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+}
+
+
+.spell-scroll .scroll-bar:vertical .thumb, 
+.spell-scroll-modified .scroll-bar:vertical .thumb 
+{
+    -fx-background-color: #2e302f; 
+    -fx-background-radius: 6px;
+}
+
+.spell-scroll .scroll-bar:vertical .track, .spell-scroll-modified .scroll-bar:vertical .track 
+{
+    -fx-background-color: #e9ebe1; 
+}
+
+.spell-scroll .increment-button, .spell-scroll .decrement-button, .spell-scroll-modified .increment-button, .spell-scroll-modified .decrement-button
+
+{
+    -fx-background-color: #596e5e;  
+}
+
+
+.spell-scroll .increment-arrow, .spell-scroll .decrement-arrow, .spell-scroll-modified .increment-arrow, .spell-scroll-modified .decrement-arrow
+{
+    -fx-background-color: #2e302f;  
+}
+
+.stat-label 
+{
+    -fx-background-color: #f4ede5;
+    -fx-border-color: #876962;
+    -fx-border-width: 5px;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 10 15;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.06), 5, 0, 2, 2);
+}
+
+
+.main-menu {
+    -fx-background-color: #efe3d6;
+    -fx-padding: 20;
+}
+
+.main-menu-title 
+{
+    -fx-font-size: 40px;
+    -fx-font-family: "Georgia";
+    -fx-text-fill: #4b3832;
+    -fx-font-weight: bold;
+}
+
+.menu-option 
+{
+    -fx-background-color: #f5ede0;
+    -fx-background-radius: 20;
+    -fx-border-color: #9D7C60;
+    -fx-border-width: 7;
+    -fx-border-radius: 20;
+    -fx-padding: 10;
+}
+
+.menu-option .button 
+{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.menu-option .label 
+{
+    -fx-font-family: "Georgia";
+    -fx-font-size: 16px;
+    -fx-text-fill: #3e2c23;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+
+.menu-option:hover 
+{
+    -fx-background-color: #e6dbcc;
+}

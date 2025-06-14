@@ -39,6 +39,24 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 //Overall the GUI has a bit more minimal commenting except in cases where the intent of something isn't clear.
+/**
+ * IF YOU WANT TO SEE A MORE DETAILED EXPLANATION OF THE LOGIC PLEASE LOOK AT THE TERMINAL VERSION!! 
+ * It's far more clearly commented whereas the GUI isn't because I just finished it yesterday and did  not have the time to.
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 public class AppGUI extends Application 
 { 
     private String playerClass;
@@ -1214,7 +1232,7 @@ public class AppGUI extends Application
         stage.show();
     }
     
-    private Button createSpellButton(JSONObject spell, Font font, JSONObject[] selectedSpellHolder, TextFlow spellInfoText, int statModifier, Button actionButton, JSONArray playerSpells, int spellsCanKnow, SpellBook spellBook, boolean isAdding) 
+    private Button createSpellButton(JSONObject spell, Font font, JSONObject[] selectedSpellHolder, TextFlow spellInfoText, int statModifier, Button actionButton, JSONArray playerSpells, int spellsCanKnow, SpellBook spellBook, boolean add) 
     {
         String spellName = spell.getString("name");
         Button spellButton = new Button(spellName);
@@ -1252,7 +1270,7 @@ public class AppGUI extends Application
                     }
                 }
 
-                if (isAdding) 
+                if (add) 
                 {
                     if (alreadyKnown || playerSpells.length() >= spellsCanKnow) 
                     {
@@ -1273,7 +1291,7 @@ public class AppGUI extends Application
         return spellButton;
     }
 
-    private void updateFilteredSpellList(JSONArray spells, VBox spellListVBox, Font spellFont, JSONObject[] selectedSpell2, TextFlow spellInfoText, int statModifier, Button actionButton, SpellBook spellBook, boolean isAdding) 
+    private void updateFilteredSpellList(JSONArray spells, VBox spellListVBox, Font spellFont, JSONObject[] selectedSpell2, TextFlow spellInfoText, int statModifier, Button actionButton, SpellBook spellBook, boolean add) 
     {
         spellListVBox.getChildren().clear();
 
@@ -1315,7 +1333,7 @@ public class AppGUI extends Application
 
             if (passesLevel && passesDamageFilter && passesNonDamageFilter && passesDamageTypeFilter) 
             {
-                Button spellButton = createSpellButton(spell, spellFont, selectedSpell2, spellInfoText, statModifier, actionButton, playerSpells, spellsCanKnow, spellBook, isAdding);
+                Button spellButton = createSpellButton(spell, spellFont, selectedSpell2, spellInfoText, statModifier, actionButton, playerSpells, spellsCanKnow, spellBook, add);
                 spellListVBox.getChildren().add(spellButton);
             }
         }
