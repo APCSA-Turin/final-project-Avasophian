@@ -510,8 +510,8 @@ public class AppGUI extends Application
         wholeLayout.setPadding(new Insets(20));
         wholeLayout.setStyle("-fx-background-color: #baabb8;");
 
-        HBox mainLayout = new HBox(20);
-        mainLayout.setPadding(new Insets(20));
+        HBox layout2 = new HBox(20);
+        layout2.setPadding(new Insets(20));
 
         Text spellCountText = new Text("Spells: " + playerSpells.length() + " / " + spellsCanKnow);
         spellCountText.setFont(spellFont);
@@ -577,9 +577,6 @@ public class AppGUI extends Application
         searchButton.setMinWidth(90);
         searchButton.setFont(spellFont);
         searchButton.getStyleClass().add("search-button");
-
-
-
         searchButton.setOnAction(new EventHandler<ActionEvent>() 
         {
             public void handle(ActionEvent event) 
@@ -655,9 +652,9 @@ public class AppGUI extends Application
         spellInfoBox.setPadding(new Insets(10));
         spellInfoBox.setPrefWidth(900);
 
-        VBox filterSidebar = new VBox(15);
-        filterSidebar.setPadding(new Insets(10));
-        filterSidebar.setPrefWidth(250);
+        VBox sidebar = new VBox(15);
+        sidebar.setPadding(new Insets(10));
+        sidebar.setPrefWidth(250);
 
         Label sortLabel = new Label("Sort Options:");
         sortLabel.setFont(spellFontSmall);
@@ -725,8 +722,7 @@ public class AppGUI extends Application
             }
         });
 
-
-        VBox sortSection = new VBox(5, sortLabel, sortComboBox);
+        VBox sortingVBox = new VBox(5, sortLabel, sortComboBox);
         Label levelLabel = new Label("Filter by Level:");
         levelLabel.setFont(spellFont);
 
@@ -801,7 +797,6 @@ public class AppGUI extends Application
 
                 }
             });
-
             damageTypeFilters.getChildren().add(damageTypeBox);
         }
 
@@ -811,18 +806,16 @@ public class AppGUI extends Application
         Label effectLabel = new Label("Damage Filter:");
         effectLabel.setFont(spellFontSmall);
 
-        ComboBox<String> effectComboBox = new ComboBox<>();
-        effectComboBox.getItems().addAll("No filter", "Damaging", "Non-Damaging");
-        effectComboBox.setPromptText("Select damage toggle");
-        effectComboBox.setPrefWidth(200);
+        ComboBox<String> dmgComboBox = new ComboBox<>();
+        dmgComboBox.getItems().addAll("No filter", "Damaging", "Non-Damaging");
+        dmgComboBox.setPromptText("Select damage toggle");
+        dmgComboBox.setPrefWidth(200);
         spellInfoBox.getStyleClass().add("combo-box");
-
-
-        effectComboBox.setOnAction(new EventHandler<ActionEvent>() 
+        dmgComboBox.setOnAction(new EventHandler<ActionEvent>() 
         {
             public void handle(ActionEvent event) 
             {
-                String selected = effectComboBox.getValue();
+                String selected = dmgComboBox.getValue();
                 if (selected == null || selected.equals("No filter")) 
                 {
                     filterByDamage = false;
@@ -842,20 +835,16 @@ public class AppGUI extends Application
             }
         });
 
+        VBox effectTypeSection = new VBox(5, effectLabel, dmgComboBox);
+        sidebar.getChildren().addAll(sortingVBox,levelSection,damageTypeSection,effectTypeSection);
+        sidebar.getStyleClass().add("sidebar");
 
+        ScrollPane sideBarScrollPane = new ScrollPane(sidebar);
+        sideBarScrollPane.setFitToWidth(true);
+        sideBarScrollPane.setPrefWidth(300);
+        VBox.setVgrow(sideBarScrollPane, Priority.ALWAYS);
 
-        VBox effectTypeSection = new VBox(5, effectLabel, effectComboBox);
-
-        filterSidebar.getChildren().addAll(sortSection,levelSection,damageTypeSection,effectTypeSection);
-        filterSidebar.getStyleClass().add("sidebar");
-
-        ScrollPane sideBarPane = new ScrollPane(filterSidebar);
-        sideBarPane.setFitToWidth(true);
-        sideBarPane.setPrefWidth(300);
-        VBox.setVgrow(sideBarPane, Priority.ALWAYS);
-
-
-        mainLayout.getChildren().addAll(filterSidebar, spellListSection, spellInfoBox);
+        layout2.getChildren().addAll(sidebar, spellListSection, spellInfoBox);
 
         HBox bottomBar = new HBox();
         bottomBar.setPadding(new Insets(10));
@@ -888,7 +877,7 @@ public class AppGUI extends Application
 
         bottomBar.getChildren().add(backButton);
         wholeLayout.setTop(topContainer);
-        wholeLayout.setCenter(mainLayout);
+        wholeLayout.setCenter(layout2);
         wholeLayout.setBottom(bottomBar);
 
         for (int i = 0; i < spellsCanLearn.length(); i++) 
@@ -898,9 +887,9 @@ public class AppGUI extends Application
             spellListVBox.getChildren().add(spellButton);
         }
 
-        Scene spellScene = new Scene(wholeLayout, 800, 600);
-        spellScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-        stage.setScene(spellScene);
+        Scene scene = new Scene(wholeLayout, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        stage.setScene(scene);
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
     }
@@ -911,18 +900,17 @@ public class AppGUI extends Application
         wholeLayout.setPadding(new Insets(20));
         wholeLayout.setStyle("-fx-background-color: #baabb8;");
 
-
-        HBox mainLayout = new HBox(20);
-        mainLayout.setPadding(new Insets(20));
+        HBox layout2 = new HBox(20);
+        layout2.setPadding(new Insets(20));
 
         Text spellCountText = new Text("Spells: " + playerSpells.length() + " / " + spellsCanKnow);
         spellCountText.setFont(new Font("Georgia", 16));
 
-        HBox topBar = new HBox(spellCountText);
-        topBar.setAlignment(Pos.TOP_RIGHT);
-        topBar.setPadding(new Insets(0, 10, 0, 0));
+        HBox top = new HBox(spellCountText);
+        top.setAlignment(Pos.TOP_RIGHT);
+        top.setPadding(new Insets(0, 10, 0, 0));
 
-        VBox topContainer = new VBox(10, topBar);
+        VBox topContainer = new VBox(10, top);
         topContainer.setPadding(new Insets(0, 10, 10, 10));
 
 
@@ -959,16 +947,16 @@ public class AppGUI extends Application
         //for some reason my code wasnt working if I tried to do it like normal. 
         //So i did some digging and found out you had to make a single length array for some reason??
         //I don't fully get it I'm gonna be honest with you but it works.
-        JSONObject[] selectedSpell2 = new JSONObject[1]; 
+        JSONObject[] spell2 = new JSONObject[1]; 
 
         removeButton.setOnAction(new EventHandler<ActionEvent>() 
         {
             public void handle(ActionEvent event) 
             {
-               JSONObject selectedSpell = selectedSpell2[0];
-                if (selectedSpell != null) 
+               JSONObject spell = spell2[0];
+                if (spell != null) 
                 {
-                    String spellName = selectedSpell.getString("name").toLowerCase();
+                    String spellName = spell.getString("name").toLowerCase();
                     boolean found = false;
                     int foundIndex = 0;
 
@@ -989,13 +977,13 @@ public class AppGUI extends Application
 
                         //once its removed you have to rebuild the vbox on the left because it doesnt automatically update
                         spellInfoText.getChildren().clear();
-                        selectedSpell2[0] = null;
+                        spell2[0] = null;
                         spellCountText.setText("Spells: " + playerSpells.length() + " / " + spellsCanKnow);
                         spellListVBox.getChildren().clear();
                         for (int i = 0; i < playerSpells.length(); i++) 
                         {
                             JSONObject spellObj = playerSpells.getJSONObject(i);
-                            Button spellButton = createSpellButton(spellObj, new Font("Georgia", 16),selectedSpell2, spellInfoText, statModifier,removeButton, playerSpells, spellsCanKnow, spellBook,false);
+                            Button spellButton = createSpellButton(spellObj, new Font("Georgia", 16),spell2, spellInfoText, statModifier,removeButton, playerSpells, spellsCanKnow, spellBook,false);
                             spellListVBox.getChildren().add(spellButton);
                         }
                         
@@ -1009,17 +997,16 @@ public class AppGUI extends Application
         spellInfoBox.setPrefWidth(1000);
         spellInfoBox.getStyleClass().add("spell-info");
 
+        layout2.getChildren().addAll(spellScrollPane, spellInfoBox);
 
-        mainLayout.getChildren().addAll(spellScrollPane, spellInfoBox);
+        HBox bottom = new HBox();
+        bottom.setPadding(new Insets(10));
+        bottom.setAlignment(Pos.CENTER_RIGHT);
 
-        HBox bottomBar = new HBox();
-        bottomBar.setPadding(new Insets(10));
-        bottomBar.setAlignment(Pos.CENTER_RIGHT);
-
-        Button backButton = new Button("Back");
-        backButton.setFont(new Font("Georgia", 20));
-        backButton.getStyleClass().add("spell-button");
-        backButton.setOnAction(new EventHandler<ActionEvent>() 
+        Button back = new Button("Back");
+        back.setFont(new Font("Georgia", 20));
+        back.getStyleClass().add("spell-button");
+        back.setOnAction(new EventHandler<ActionEvent>() 
         {
             public void handle(ActionEvent event) 
             {
@@ -1035,21 +1022,21 @@ public class AppGUI extends Application
             }
         });
 
-        bottomBar.getChildren().add(backButton);
+        bottom.getChildren().add(back);
         wholeLayout.setTop(topContainer);
-        wholeLayout.setCenter(mainLayout);
-        wholeLayout.setBottom(bottomBar);
+        wholeLayout.setCenter(layout2);
+        wholeLayout.setBottom(bottom);
 
         for (int i = 0; i < playerSpells.length(); i++) 
         {
-            JSONObject spellObj = playerSpells.getJSONObject(i);
-            Button spellButton = createSpellButton(spellObj, new Font("Georgia", 16),selectedSpell2, spellInfoText, statModifier,removeButton, playerSpells, spellsCanKnow, spellBook,false);
+            JSONObject spellJSon = playerSpells.getJSONObject(i);
+            Button spellButton = createSpellButton(spellJSon, new Font("Georgia", 16),spell2, spellInfoText, statModifier,removeButton, playerSpells, spellsCanKnow, spellBook,false);
             spellListVBox.getChildren().add(spellButton);
         }
 
-        Scene spellScene = new Scene(wholeLayout, 800, 600);
-        spellScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-        stage.setScene(spellScene);
+        Scene scene = new Scene(wholeLayout, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        stage.setScene(scene);
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
     }
@@ -1062,19 +1049,18 @@ public class AppGUI extends Application
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(30));
 
-        HBox mainLayout = new HBox(30);
-        mainLayout.setAlignment(Pos.CENTER);
+        HBox layout2 = new HBox(30);
+        layout2.setAlignment(Pos.CENTER);
 
-        
-        String className = spellBook.getPlayerClass().toLowerCase();
-        Image classImg = new Image(getClass().getResourceAsStream("/images/" + className + ".jpg"), 350, 350, true, true);
-        ImageView classImageView = new ImageView(classImg);
+        String name = spellBook.getPlayerClass().toLowerCase();
+        Image img = new Image(getClass().getResourceAsStream("/images/" + name + ".jpg"), 350, 350, true, true);
+        ImageView imgView = new ImageView(img);
         Rectangle round = new Rectangle(350, 350);
         round.setArcWidth(20);
         round.setArcHeight(20);
-        classImageView.setClip(round);
+        imgView.setClip(round);
 
-        VBox playerVbox = new VBox(classImageView);
+        VBox playerVbox = new VBox(imgView);
         playerVbox.getStyleClass().add("menu-option");
         playerVbox.setPrefHeight(350);
         playerVbox.setPrefWidth(350);
@@ -1085,39 +1071,39 @@ public class AppGUI extends Application
 
         Text classText = new Text("Class: " + SpellUtility.capitalizeString(spellBook.getPlayerClass()));
         classText.setFont(valueFont);
-        HBox classBox = new HBox(classText);
-        classBox.setAlignment(Pos.CENTER_LEFT);
-        classBox.setPadding(new Insets(10));
-        classBox.getStyleClass().add("stat-label");
+        HBox classHBox = new HBox(classText);
+        classHBox.setAlignment(Pos.CENTER_LEFT);
+        classHBox.setPadding(new Insets(10));
+        classHBox.getStyleClass().add("stat-label");
 
 
-        Text levelText = new Text("Level: " + spellBook.getPlayerLevel());
-        levelText.setFont(valueFont);
-        HBox levelBox = new HBox(levelText);
-        levelBox.setAlignment(Pos.CENTER_LEFT);
-        levelBox.setPadding(new Insets(10));
-        levelBox.getStyleClass().add("stat-label");
+        Text txt = new Text("Level: " + spellBook.getPlayerLevel());
+        txt.setFont(valueFont);
+        HBox levelHBox = new HBox(txt);
+        levelHBox.setAlignment(Pos.CENTER_LEFT);
+        levelHBox.setPadding(new Insets(10));
+        levelHBox.getStyleClass().add("stat-label");
 
         int[] statMod = {statModifier}; 
         Text statText = new Text("Stat Modifier: +" + statMod[0]);
         statText.setFont(valueFont);
-        HBox statBox = new HBox(statText);
-        statBox.setAlignment(Pos.CENTER_LEFT);
-        statBox.setPadding(new Insets(10));
-        statBox.getStyleClass().add("stat-label");
+        HBox statHBox = new HBox(statText);
+        statHBox.setAlignment(Pos.CENTER_LEFT);
+        statHBox.setPadding(new Insets(10));
+        statHBox.getStyleClass().add("stat-label");
 
         VBox infoBox = new VBox(15);
-        infoBox.getChildren().addAll(classBox, levelBox, statBox);
+        infoBox.getChildren().addAll(classHBox, levelHBox, statHBox);
         infoBox.setAlignment(Pos.CENTER);
     
 
-        HBox buttonBox = new HBox(20);
-        buttonBox.setAlignment(Pos.CENTER);
+        HBox hBox = new HBox(20);
+        hBox.setAlignment(Pos.CENTER);
 
-        Button levelUpButton = new Button("Level Up");
-        levelUpButton.setFont(labelFont);
-        levelUpButton.getStyleClass().add("brown-button");
-        levelUpButton.setOnAction(new EventHandler<ActionEvent>()
+        Button lvlUp = new Button("Level Up");
+        lvlUp.setFont(labelFont);
+        lvlUp.getStyleClass().add("brown-button");
+        lvlUp.setOnAction(new EventHandler<ActionEvent>()
         {
             public void handle(ActionEvent event)
             {
@@ -1125,7 +1111,7 @@ public class AppGUI extends Application
                 {
                     spellBook.levelUp();
                     playerLevel = spellBook.getPlayerLevel(); 
-                    levelText.setText("Level: " + spellBook.getPlayerLevel());
+                    txt.setText("Level: " + spellBook.getPlayerLevel());
                     spellsCanKnow = spellBook.spellsKnownCalculator(statModifier);
                     spellsCanLearn = new JSONArray();
                     for (int i = 0; i < results.length(); i++) 
@@ -1210,21 +1196,21 @@ public class AppGUI extends Application
                 showMainMenu(stage, spellsCanLearn);
             }
         });
-        buttonBox.getChildren().addAll(levelUpButton, changeStatButton, backButton);
-        mainLayout.getChildren().addAll(playerVbox, infoBox);
+        hBox.getChildren().addAll(lvlUp, changeStatButton, backButton);
+        layout2.getChildren().addAll(playerVbox, infoBox);
         HBox.setHgrow(playerVbox, Priority.NEVER);
 
-        mainLayout.setStyle("-fx-background-color: #baabb8;");
-        mainLayout.setAlignment(Pos.CENTER); 
+        layout2.setStyle("-fx-background-color: #baabb8;");
+        layout2.setAlignment(Pos.CENTER); 
         
-        root.setCenter(mainLayout);
-        root.setBottom(buttonBox);
-        BorderPane.setMargin(buttonBox, new Insets(30, 0, 0, 0));
+        root.setCenter(layout2);
+        root.setBottom(hBox);
+        BorderPane.setMargin(hBox, new Insets(30, 0, 0, 0));
 
         Scene scene = new Scene(root, 600, 400);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         
-
+        
         stage.setScene(scene);
         stage.setTitle("Player Stats");
         stage.setFullScreen(true);
