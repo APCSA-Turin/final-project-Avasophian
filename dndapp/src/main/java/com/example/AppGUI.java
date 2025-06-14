@@ -488,8 +488,6 @@ public class AppGUI extends Application
         menuLayout.getStyleClass().add("main-menu");
         menuLayout.setStyle("-fx-background-color: #baabb8;");
 
-
-        
         Scene scene = new Scene(menuLayout, 600, 500);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
@@ -516,11 +514,11 @@ public class AppGUI extends Application
         Text spellCountText = new Text("Spells: " + playerSpells.length() + " / " + spellsCanKnow);
         spellCountText.setFont(spellFont);
 
-        HBox topBar = new HBox(spellCountText);
-        topBar.setAlignment(Pos.TOP_RIGHT);
-        topBar.setPadding(new Insets(0, 10, 0, 0));
+        HBox top = new HBox(spellCountText);
+        top.setAlignment(Pos.TOP_RIGHT);
+        top.setPadding(new Insets(0, 10, 0, 0));
 
-        VBox topContainer = new VBox(10, topBar);
+        VBox topContainer = new VBox(10, top);
         topContainer.setPadding(new Insets(0, 10, 10, 10));
 
 
@@ -577,6 +575,7 @@ public class AppGUI extends Application
         searchButton.setMinWidth(90);
         searchButton.setFont(spellFont);
         searchButton.getStyleClass().add("search-button");
+
         searchButton.setOnAction(new EventHandler<ActionEvent>() 
         {
             public void handle(ActionEvent event) 
@@ -664,7 +663,6 @@ public class AppGUI extends Application
         sortComboBox.setPromptText("Select sort option");
         sortComboBox.setPrefWidth(200);
         sortComboBox.getStyleClass().add("combo-box");
-
         sortComboBox.setOnAction(new EventHandler<ActionEvent>() 
         {
             public void handle(ActionEvent event) 
@@ -730,14 +728,14 @@ public class AppGUI extends Application
         String[] levels = { "Cantrip", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
         for (String lvl : levels) 
         {
-            int levelInt;
+            int lvlInt;
             if (lvl.equals("Cantrip")) 
             {
-                levelInt = 0;
+                lvlInt = 0;
             } 
             else 
             {
-                levelInt = Integer.parseInt(lvl);
+                lvlInt = Integer.parseInt(lvl);
             }
 
             CheckBox levelBox = new CheckBox(lvl);
@@ -749,14 +747,14 @@ public class AppGUI extends Application
                 {
                     if (levelBox.isSelected()) 
                     {
-                        if (!allowedLevels.contains(levelInt)) 
+                        if (!allowedLevels.contains(lvlInt)) 
                         {
-                            allowedLevels.add(levelInt);
+                            allowedLevels.add(lvlInt);
                         }
                     } 
                     else 
                     {
-                        allowedLevels.remove((Object) levelInt);
+                        allowedLevels.remove((Object) lvlInt);
                     }
 
                     updateFilteredSpellList(spellsCanLearn, spellListVBox, spellFont, selectedSpell2, spellInfoText, statModifier, addButton, spellBook, true);
@@ -846,14 +844,14 @@ public class AppGUI extends Application
 
         layout2.getChildren().addAll(sidebar, spellListSection, spellInfoBox);
 
-        HBox bottomBar = new HBox();
-        bottomBar.setPadding(new Insets(10));
-        bottomBar.setAlignment(Pos.CENTER_RIGHT);
+        HBox bottom = new HBox();
+        bottom.setPadding(new Insets(10));
+        bottom.setAlignment(Pos.CENTER_RIGHT);
 
-        Button backButton = new Button("Back");
-        backButton.setFont(new Font("Georgia", 20));
-        backButton.getStyleClass().add("spell-button");
-        backButton.setOnAction(new EventHandler<ActionEvent>() 
+        Button back = new Button("Back");
+        back.setFont(new Font("Georgia", 20));
+        back.getStyleClass().add("spell-button");
+        back.setOnAction(new EventHandler<ActionEvent>() 
         {
             public void handle(ActionEvent event) 
             {
@@ -875,10 +873,10 @@ public class AppGUI extends Application
             }
         });
 
-        bottomBar.getChildren().add(backButton);
-        wholeLayout.setTop(topContainer);
+        bottom.getChildren().add(back);
+        wholeLayout.setTop(top);
         wholeLayout.setCenter(layout2);
-        wholeLayout.setBottom(bottomBar);
+        wholeLayout.setBottom(bottom);
 
         for (int i = 0; i < spellsCanLearn.length(); i++) 
         {
@@ -1210,7 +1208,6 @@ public class AppGUI extends Application
         Scene scene = new Scene(root, 600, 400);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         
-        
         stage.setScene(scene);
         stage.setTitle("Player Stats");
         stage.setFullScreen(true);
@@ -1218,6 +1215,7 @@ public class AppGUI extends Application
         stage.show();
     }
     
+    //I had this code snippet a lot of times in my code so I just made it a method, it builds a spell button based on the given info
     private Button createSpellButton(JSONObject spell, Font font, JSONObject[] selectedSpellHolder, TextFlow spellInfoText, int statModifier, Button actionButton, JSONArray playerSpells, int spellsCanKnow, SpellBook spellBook, boolean add) 
     {
         String spellName = spell.getString("name");
@@ -1277,6 +1275,7 @@ public class AppGUI extends Application
         return spellButton;
     }
 
+    //I had this code snippet a lot of times in my code so I just made it a method, it adds the spells that pass the filters to the UI
     private void updateFilteredSpellList(JSONArray spells, VBox spellListVBox, Font spellFont, JSONObject[] selectedSpell2, TextFlow spellInfoText, int statModifier, Button actionButton, SpellBook spellBook, boolean add) 
     {
         spellListVBox.getChildren().clear();
@@ -1302,7 +1301,6 @@ public class AppGUI extends Application
             boolean passesLevel = allowedLevels.contains(spellLevel);
             boolean passesDamageFilter = !(filterByDamage && !spell.has("damage"));
             boolean passesNonDamageFilter = !(filterByNonDamaging && spell.has("damage"));
-
             boolean passesDamageTypeFilter = true;
             if (filterByDamageType) 
             {
